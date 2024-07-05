@@ -12,6 +12,7 @@ from src.utils import load_obj
 class PredictPipeline:
     def __init__(self):
         self.model_path=os.path.join('artifacts','model.pkl')
+        self.preprocessor_path=os.path.join('arifacts','preprocessor.pkl')
         self.model=joblib.load(self.model_path)
 
     def predict(self,features):
