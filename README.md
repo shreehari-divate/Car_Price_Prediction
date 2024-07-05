@@ -21,5 +21,5 @@ this projects aims to predict the selling price of cars based from the data coll
 Best model to use is Random Forest with 0.96 R2 score
 
 ## Sample:
-
+![sample1](images/z1.png)
   
