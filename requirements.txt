@@ -6,7 +6,6 @@ scikit-learn==1.5.0
 catboost
 xgboost
 dill
-joblib==1.1.0
 flask==2.1.1
 gunicorn
 #-e . #It tells pip to install current package in editable mode
