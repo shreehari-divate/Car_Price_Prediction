@@ -1,12 +1,11 @@
-pandas==1.4.2
-numpy==1.22.3  
-seaborn==0.11.2
-matplotlib==3.5.1
-scikit-learn==1.5.0
-catboost==1.0.6
-xgboost==1.5.0
-dill==0.3.4
-flask==2.1.1
-werkzeug==2.1.1  
-gunicorn==20.1.0 
+pandas
+numpy 
+seaborn
+matplotlib
+scikit-learn
+catboost
+xgboost
+dill
+flask
+gunicorn
 #-e . #It tells pip to install current package in editable mode
