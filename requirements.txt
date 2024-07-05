@@ -7,4 +7,5 @@ catboost
 xgboost
 dill
 flask
+gunicorn
 #-e . #It tells pip to install current package in editable mode
