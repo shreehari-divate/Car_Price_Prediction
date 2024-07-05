@@ -46,7 +46,7 @@ class DataTransform:
             # Combine all transformations
             transformers = [
                 ('mileage_pipeline', mileage_pipeline, ['mileage(km/ltr/kg)']),
-                ('num_pipeline', num_pipeline, ['engine', 'max_power', 'seats']),
+                ('num_pipeline', num_pipeline, ['engine', 'max_power']),
                 ('cat_pipeline', cat_pipeline, ['fuel', 'seller_type', 'transmission', 'owner'])
             ]
 
@@ -82,10 +82,10 @@ class DataTransform:
             target_col_name = 'selling_price'
 
             # Drop 'name' column and target column from input features
-            input_feature_train_df = train_df.drop(columns=[target_col_name, 'name'], axis=1)
+            input_feature_train_df = train_df.drop(columns=[target_col_name, 'name','seats'], axis=1)
             target_feature_train_df = train_df[target_col_name]
 
-            input_feature_test_df = test_df.drop(columns=[target_col_name, 'name'], axis=1)
+            input_feature_test_df = test_df.drop(columns=[target_col_name, 'name','seats'], axis=1)
             target_feature_test_df = test_df[target_col_name]
 
             logging.info("Applying preprocessing object on training and test dataframes")

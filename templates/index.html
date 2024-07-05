@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Car Price</title>
+</head>
+<style>
+    body{
+        background-color:aliceblue;
+
+    }
+    .pred-box{
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .pred-form{
+        border: 2px solid;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 6px;
+        width: 380px;
+        height: 550px;
+        margin: 0 auto;
+        font-size: 22px;
+        line-height: 2;
+
+    }
+    label{
+        margin-right: 10px;
+        width: 150px;
+    }
+
+    input{
+        flex: 1;
+        width: 200px;
+        height: 20px;
+        border: none;
+        border-bottom: 1px solid black;
+        background-color: aliceblue;
+        font-size: 20px;
+        margin-left: 0;
+        
+    }
+    select{
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: 18px;
+        background-color: aliceblue;
+    }
+    option{
+        height: 20px;
+        font-size: 20px;
+    }
+    .btn{
+        margin-top: 20px;
+        width: 80px;
+        height: 30px;
+        background-color: green;
+        color: white;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
+        margin-left: 100px;
+    }
+    .btn-re{
+        margin-top: -30px;
+        width: 80px;
+        height: 30px;
+        background-color: gray;
+        color: white;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
+        margin-left: 190px;
+        
+    }
+
+    .navbar{
+        background-color: navy;
+        width: auto;
+        height: 70px;
+        display: flex;
+        align-items: center;
+    }
+    .navbar-brand{
+        text-decoration: none;
+        font-size: 35px;
+        color: white;
+    }
+    h1,p{
+        text-align: center;
+    }
+
+    .head{
+        color: white;
+        background-color: navy;
+        top: -10px;
+        margin-left: 0;
+        font-size: 24px;
+        text-align: center;
+        padding: 5px 0;
+        left: -10px;
+        position: relative;
+        width: calc(100% + 20px);
+        box-sizing: border-box;
+        border-radius: 6px 6px 0 0;
+                
+    }
+    .res{
+        position: relative;
+        margin-top: 20px;
+        font-size: 20px;
+        color: darkblue;
+        text-align: center;
+    }
+
+    
+</style>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="/">Cam Cars</a>
+    </nav>
+    <h1>Welcome to Cam Cars</h1>
+    <p><i> Your one stop to get the right value for your car!! </i></p>
+    <div class="pred-box">
+        <form action="{{url_for('predict')}}" method="post" class="pred-form">
+            <div class="head">Predict your car price</div>
+
+            <label for="name">Car Name:</label>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="year">Model Year:</label>
+            <input type="number" id="year" name="year" placeholder="2000,2002,2022..." required><br>
+
+            <label for="kmdriven">Km Driven:</label>
+            <input type="number" id="kmdriven" name="kmdriven" placeholder="1000,5000,..." required><br>
+
+            <label for="engine">Engine: </label>
+            <input type="number" name="engine" placeholder="800,999,1199,..(in cc)" required><br>
+
+            <label for="mileage">Mileage:</label>
+            <input type="number" name="mileage" placeholder="10,15,20..(in km/kg/ltr)" required><br>
+            
+            <label for="power">Max Power:</label>
+            <input type="number" name="power" placeholder="74,103,90...(in bhp)" required><br>
+
+            <label for="fuel">Fuel Type:</label>
+            <select name="fuel" id="fuel" required>
+                <option value="petrol">Petrol</option>
+                <option value="diesel">Diesel</option>
+                <option value="cng">CNG</option>
+                <option value="LPG">LPG</option>
+            </select><br>            
+
+            <label for="transmission">Transmission:</label>
+            <select name="transmission" id="transmission" required>
+               <option value="automatic">Automatic</option>
+               <option value="manual">Manual</option>
+            </select><br>               
+
+            <label for="seller">Seller Type:</label>
+            <select name="seller" id="seller" required>
+                <option value="individual">Individual</option>
+                <option value="dealer">Dealer</option>
+                <option value="trustmarkdealer">Trustmark Dealer</option>
+            </select><br>
+
+            <label for="owner">Owner Type:</label>
+            <select name="owner" id="owner" required>
+                <option value="first_owner">First Owner</option>
+                <option value="second_owner">Second Owner</option> 
+                <option value="third_owner">Third Owner</option>
+                <option value="fourth_above">Fourth and Above</option> 
+                <option value="test">This is a Test Car</option>  
+           </select><br>      
+           <button class="btn">Predict</button> <button type="button" class="btn-re" onclick="window.location.href='/'">Reset</button>
+        </form>
+        <div class="res">{{results}}</div>
+
+    </div>
+</body>
+</html>
