@@ -122,9 +122,15 @@
         color: darkblue;
         text-align: center;
     }
-
-    
 </style>
+<script>
+    document.querySelector('form').onsubmit = function() {
+        const formData = new FormData(this);
+        console.log('Form Data Submitted:', Object.fromEntries(formData.entries()));
+    };
+</script>
+
+</script>
 <body>
     <nav class="navbar">
         <a class="navbar-brand" href="/">Cam Cars</a>

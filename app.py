@@ -40,10 +40,12 @@ def predict():
             pred_df=data.get_data_as_df()
             print("dataframe cols: ",pred_df.columns)
             print(pred_df)
+            logging.info(f"DataFrame Created: {pred_df}")
 
             predict_pipeline=PredictPipeline()  
             results=predict_pipeline.predict(pred_df)[0]
             res_msg=f"You car {car_name}'s approximate price is Rs. {results:.2f}"
+            logging.info(f"Prediction Result: {res_msg}")
             return render_template('index.html',results=res_msg) 
         except Exception as e:
             logging.error(f"error occured: {e} ",exc_info=True)
