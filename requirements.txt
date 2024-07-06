@@ -1,23 +1,10 @@
-# Data manipulation and analysis
-pandas==1.4.3
-numpy==1.23.0
-
-# Visualization
-seaborn==0.11.2
-matplotlib==3.5.2
-
-# Machine Learning libraries
-scikit-learn==1.1.2
-catboost==1.0.6
-xgboost==1.5.2
-
-# Serialization and utilities
-dill==0.3.4
-
-# Web framework
-flask==2.1.1
-
-# WSGI HTTP Server for Python
-gunicorn==20.1.0
-
+pandas
+numpy 
+seaborn
+matplotlib
+scikit-learn
+xgboost
+dill
+flask
+gunicorn
 #-e . #It tells pip to install current package in editable mode
