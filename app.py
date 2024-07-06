@@ -3,61 +3,53 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from flask import Flask, render_template, request, url_for
-from src.pipeline.predict_pipeline import CustomData, PredictPipeline
+from flask import Flask, render_template, request,url_for
+from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-
-app = Flask(__name__)
+app=Flask(__name__)
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/predict", methods=["POST", "GET"])
+@app.route("/predict",methods=["POST","GET"])
 def predict():
-    if request.method == "POST":
+    if request.method=="POST":
         try:
-            logging.info("Received POST request for prediction.")
+            car_name=request.form.get("name")
+            year = int(request.form.get("year"))
+            kmdriven = int(request.form.get("kmdriven"))
+            engine = int(request.form.get('engine'))
+            mileage = float(request.form.get("mileage"))
+            power = float(request.form.get("power"))
+            fuel = request.form.get("fuel")
+            transmission = request.form.get("transmission")
+            seller = request.form.get("seller")
+            owner = request.form.get("owner")
 
-            # Capture and log form data
-            form_data = request.form.to_dict()
-            logging.info(f"Form Data: {form_data}")
-
-            car_name = form_data.get("name")
             data = CustomData(
-                year=form_data.get("year"),
-                kmdriven=form_data.get("kmdriven"),
-                fuel=form_data.get("fuel"),
-                engine=form_data.get('engine'),
-                mileage=form_data.get("mileage"),
-                power=form_data.get("power"),
-                transmission=form_data.get("transmission"),
-                seller=form_data.get("seller"),
-                owner=form_data.get("owner")
-            )
+                year=year,
+                kmdriven=kmdriven,
+                fuel=fuel,
+                engine=engine,
+                mileage=mileage,
+                power=power,
+                transmission=transmission,
+                seller=seller,
+                owner=owner)
+            pred_df=data.get_data_as_df()
+            print("dataframe cols: ",pred_df.columns)
+            print(pred_df)
 
-            pred_df = data.get_data_as_df()
-            logging.info(f"Constructed DataFrame: {pred_df}")
-
-            predict_pipeline = PredictPipeline()
-
-            # Log model prediction process
-            logging.info("Starting prediction.")
-            results = predict_pipeline.predict(pred_df)[0]
-            logging.info(f"Prediction Result: {results}")
-
-            res_msg = f"Your car {car_name}'s approximate price is Rs. {results:.2f}"
-            logging.info(f"Response Message: {res_msg}")
-
-            return render_template('index.html', results=res_msg)
-        
+            predict_pipeline=PredictPipeline()  
+            results=predict_pipeline.predict(pred_df)[0]
+            res_msg=f"You car {car_name}'s approximate price is Rs. {results:.2f}"
+            return render_template('index.html',results=res_msg) 
         except Exception as e:
-            logging.error(f"Error occurred during prediction: {e}", exc_info=True)
-            return render_template('index.html', results="An error occurred during prediction.")
+            logging.error(f"error occured: {e} ",exc_info=True)
+            return render_template('index.html',results="error occured")
     else:
         return render_template('index.html')
-
-if __name__ == "__main__":
-    app.run()
+                                    
+if __name__=="__main__":
+    app.run(debug=True, host='0.0.0.0', port=5000)
