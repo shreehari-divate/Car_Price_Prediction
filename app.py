@@ -26,6 +26,11 @@ def predict():
         seller = request.form.get("seller")
         owner = request.form.get("owner")
 
+        year = int(year)
+        kmdriven = int(kmdriven)
+        engine = int(engine)
+        mileage = float(mileage)
+        power = float(power)
         data = CustomData(
             year=year,
             kmdriven=kmdriven,
