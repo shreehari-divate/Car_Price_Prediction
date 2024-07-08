@@ -17,29 +17,29 @@ def predict():
     if request.method=="POST":
         car_name=request.form.get("name")
         year = request.form.get("year")
-        kmdriven = request.form.get("kmdriven")
+        km_driven = request.form.get("km_driven")
         engine = request.form.get('engine')
         mileage = request.form.get("mileage")
-        power = request.form.get("power")
+        max_power = request.form.get("max_power")
         fuel = request.form.get("fuel")
         transmission = request.form.get("transmission")
-        seller = request.form.get("seller")
+        seller_type = request.form.get("seller_type")
         owner = request.form.get("owner")
 
         year = int(year)
-        kmdriven = int(kmdriven)
+        km_driven = int(km_driven)
         engine = int(engine)
         mileage = float(mileage)
-        power = float(power)
+        max_power = float(max_power)
         data = CustomData(
             year=year,
-            kmdriven=kmdriven,
+            kmdriven=km_driven,
             fuel=fuel,
             engine=engine,
             mileage=mileage,
-            power=power,
+            power=max_power,
             transmission=transmission,
-            seller=seller,
+            seller=seller_type,
             owner=owner)
         
         pred_df=data.get_data_as_df()
