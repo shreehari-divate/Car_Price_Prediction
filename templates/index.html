@@ -6,19 +6,17 @@
     <title>Your Car Price</title>
 </head>
 <style>
-    body{
-        background-color:aliceblue;
-
+    body {
+        background-color: aliceblue;
     }
-    .pred-box{
+    .pred-box {
         min-height: 70vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-
     }
-    .pred-form{
+    .pred-form {
         border: 2px solid;
         padding: 10px;
         border-radius: 8px;
@@ -28,14 +26,12 @@
         margin: 0 auto;
         font-size: 22px;
         line-height: 2;
-
     }
-    label{
+    label {
         margin-right: 10px;
         width: 150px;
     }
-
-    input{
+    input {
         flex: 1;
         width: 200px;
         height: 20px;
@@ -44,19 +40,18 @@
         background-color: aliceblue;
         font-size: 20px;
         margin-left: 0;
-        
     }
-    select{
+    select {
         border: none;
         border-bottom: 1px solid black;
         font-size: 18px;
         background-color: aliceblue;
     }
-    option{
+    option {
         height: 20px;
         font-size: 20px;
     }
-    .btn{
+    .btn {
         margin-top: 20px;
         width: 80px;
         height: 30px;
@@ -69,7 +64,7 @@
         display: block;
         margin-left: 100px;
     }
-    .btn-re{
+    .btn-re {
         margin-top: -30px;
         width: 80px;
         height: 30px;
@@ -81,26 +76,23 @@
         cursor: pointer;
         display: block;
         margin-left: 190px;
-        
     }
-
-    .navbar{
+    .navbar {
         background-color: navy;
         width: auto;
         height: 70px;
         display: flex;
         align-items: center;
     }
-    .navbar-brand{
+    .navbar-brand {
         text-decoration: none;
         font-size: 35px;
         color: white;
     }
-    h1,p{
+    h1, p {
         text-align: center;
     }
-
-    .head{
+    .head {
         color: white;
         background-color: navy;
         top: -10px;
@@ -113,9 +105,8 @@
         width: calc(100% + 20px);
         box-sizing: border-box;
         border-radius: 6px 6px 0 0;
-                
     }
-    .res{
+    .res {
         position: relative;
         margin-top: 20px;
         font-size: 20px;
@@ -124,8 +115,6 @@
     }
 </style>
 
-
-</script>
 <body>
     <nav class="navbar">
         <a class="navbar-brand" href="/">Cam Cars</a>
@@ -146,10 +135,10 @@
             <input id="kmdriven" name="kmdriven" placeholder="1000,5000,..." required><br>
 
             <label for="engine">Engine: </label>
-            <input id="engine" name="engine" placeholder="800,999,1199,..(in cc)" required><br>
+            <input id="engine" name="engine" placeholder="800,999,1199...(in cc)" required><br>
 
             <label for="mileage">Mileage:</label>
-            <input id="mileage" name="mileage" placeholder="10,15,20..(in km/kg/ltr)" required><br>
+            <input id="mileage" name="mileage" placeholder="10,15,20...(in km/l)" required><br>
             
             <label for="power">Max Power:</label>
             <input id="power" name="power" placeholder="74,103,90...(in bhp)" required><br>
@@ -164,8 +153,8 @@
 
             <label for="transmission">Transmission:</label>
             <select name="transmission" id="transmission" required>
-               <option value="automatic">Automatic</option>
-               <option value="manual">Manual</option>
+                <option value="automatic">Automatic</option>
+                <option value="manual">Manual</option>
             </select><br>               
 
             <label for="seller">Seller Type:</label>
@@ -182,12 +171,11 @@
                 <option value="third_owner">Third Owner</option>
                 <option value="fourth_above">Fourth and Above</option> 
                 <option value="test">This is a Test Car</option>  
-           </select><br>      
-           <button class="btn" type="submit">Predict</button>
-           <button type="button" class="btn-re" onclick="window.location.href='/'">Reset</button>
+            </select><br>      
+            <button class="btn" type="submit">Predict</button>
+            <button type="button" class="btn-re" onclick="window.location.href='/'">Reset</button>
         </form>
         <div class="res">{{results}}</div>
-
     </div>
 </body>
 </html>
