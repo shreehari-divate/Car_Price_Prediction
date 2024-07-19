@@ -12,7 +12,7 @@ app=Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/predict",methods=["POST","GET"])
+'''@app.route("/predict",methods=["POST","GET"])
 def predict():
     if request.method=="POST":
         try:
@@ -61,6 +61,68 @@ def predict():
             render_template('index.html',res_msg)
     else:
         return render_template('index.html')
-                                    
+                                    '''
+
+@app.route("/predict", methods=["POST", "GET"])
+def predict():
+    if request.method == "POST":
+        try:
+            form_data = get_form_data(request)
+            data = process_form_data(form_data)
+            results = make_prediction(data)
+            res_msg = format_result_message(form_data['car_name'], results)
+            return render_template('index.html', results=res_msg)
+        except Exception as e:
+            app.logger.error("Error occurred during prediction: %s", str(e))
+            return render_template('index.html', results="Error in prediction. Please check your inputs and try again.")
+    else:
+        return render_template('index.html')
+
+def get_form_data(request):
+    """Extract form data from the request."""
+    form_data = {
+        "car_name": request.form.get("name"),
+        "year": int(request.form.get("year")),
+        "km_driven": int(request.form.get("km_driven")),
+        "engine": int(request.form.get("engine")),
+        "mileage": float(request.form.get("mileage")),
+        "max_power": float(request.form.get("max_power")),
+        "fuel": request.form.get("fuel"),
+        "transmission": request.form.get("transmission"),
+        "seller_type": request.form.get("seller_type"),
+        "owner": request.form.get("owner")
+    }
+    return form_data
+
+def process_form_data(form_data):
+    """Process form data into the format required for prediction."""
+    data = CustomData(
+        year=form_data["year"],
+        kmdriven=form_data["km_driven"],
+        fuel=form_data["fuel"],
+        engine=form_data["engine"],
+        mileage=form_data["mileage"],
+        power=form_data["max_power"],
+        transmission=form_data["transmission"],
+        seller=form_data["seller_type"],
+        owner=form_data["owner"]
+    )
+    pred_df = data.get_data_as_df()
+    app.logger.debug("Dataframe columns: %s", pred_df.columns)
+    app.logger.debug("Dataframe content: %s", pred_df)
+    return pred_df
+
+def make_prediction(data):
+    """Make prediction using the processed data."""
+    predict_pipeline = PredictPipeline()
+    results = predict_pipeline.predict(data)[0]
+    if not isinstance(results, (int, float)):
+        raise ValueError("Prediction result is not a number")
+    return results
+
+def format_result_message(car_name, results):
+    """Format the result message for display."""
+    return f"Your car {car_name}'s approximate price is Rs. {results:.2f}"
+
 if __name__=="__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
