@@ -1,5 +1,4 @@
 blinker==1.8.2
-catboost==1.0.6
 click==8.1.7
 colorama==0.4.6
 contourpy==1.2.1
