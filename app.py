@@ -48,7 +48,10 @@ def predict():
 
         predict_pipeline=PredictPipeline()  
         results=predict_pipeline.predict(pred_df)[0]
-        res_msg=f"You car {car_name}'s approximate price is Rs. {results:.2f}"
+        try:
+            res_msg=f"You car {car_name}'s approximate price is Rs. {results:.2f}"
+        except Exception as e:
+            res_msg="Error formatting the results"+e
         return render_template('index.html',results=res_msg) 
 
     else:
