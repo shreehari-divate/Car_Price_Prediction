@@ -65,7 +65,7 @@ def predict():
         
         except Exception as e:
             logger.error("Error during prediction: %s",e)
-            render_template('index.html',error=str(e))
+            return render_template('index.html',error=str(e))
     else:
         return render_template('index.html')
                                     
