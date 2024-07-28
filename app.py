@@ -1,8 +1,11 @@
 import logging
 import sys
 import os
+
+from sklearn.preprocessing import OneHotEncoder
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
+import numpy as np
 from flask import Flask, render_template, request,url_for
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 
@@ -12,7 +15,9 @@ app=Flask(__name__)
 def index():
     return render_template("index.html")
 
-'''@app.route("/predict",methods=["POST","GET"])
+
+#original
+@app.route("/predict",methods=["POST","GET"])
 def predict():
     if request.method=="POST":
         try:
@@ -58,12 +63,13 @@ def predict():
         
         except Exception as e:
             res_msg=e
-            render_template('index.html',res_msg)
+            render_template('index.html',error=res_msg)
     else:
         return render_template('index.html')
-                                    '''
+                                    
 
-@app.route("/predict", methods=["POST", "GET"])
+#second
+'''@app.route("/predict", methods=["POST", "GET"])
 def predict():
     if request.method == "POST":
         try:
@@ -142,6 +148,7 @@ def format_result_message(car_name, results):
         return f"Your car {car_name}'s approximate price is Rs. {results:.2f}"
     except Exception as e:
         app.logger.error("Error in formatting result message: %s", str(e))
-        raise
+        raise'''
+
 if __name__=="__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

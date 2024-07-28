@@ -98,7 +98,7 @@ h1, p {
     box-sizing: border-box;
     border-radius: 6px 6px 0 0;
 }
-.res {
+.res,.error {
     position: relative;
     margin-top: 20px;
     font-size: 20px;
