@@ -3,6 +3,8 @@ import sys
 import os
 
 from sklearn.preprocessing import OneHotEncoder
+
+from src import logger
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import numpy as np
@@ -62,8 +64,8 @@ def predict():
             return render_template('index.html',results=res_msg) 
         
         except Exception as e:
-            res_msg=e
-            render_template('index.html',error=res_msg)
+            logger.error("Error during prediction: %s",e)
+            render_template('index.html',error=str(e))
     else:
         return render_template('index.html')
                                     
