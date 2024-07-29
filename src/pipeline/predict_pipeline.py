@@ -13,14 +13,20 @@ class PredictPipeline:
     def __init__(self):
         self.model_path=os.path.join('artifacts','model.pkl')
         self.preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
+
+        if not os.path.exists(self.model_path):
+            raise FileNotFoundError(f"Model file missing: {self.model_path}")
+        if not os.path.exists(self.preprocessor_path):
+            raise FileNotFoundError(f"Preprocessor file missing: {self.preprocessor_path}")
+
         self.model=joblib.load(self.model_path)
 
     def predict(self,features):
         try:
-            model_path='artifacts\model.pkl'
-            preprocessor_path='artifacts\preprocessor.pkl'
-            model=load_obj(file_path=model_path)
-            preprocessor=load_obj(file_path=preprocessor_path)
+#            model_path='artifacts\model.pkl'
+#            preprocessor_path='artifacts\preprocessor.pkl'
+            model=load_obj(file_path=self.model_path)
+            preprocessor=load_obj(file_path=self.preprocessor_path)
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
             return preds
