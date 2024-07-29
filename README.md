@@ -20,6 +20,9 @@ this projects aims to predict the selling price of cars based from the data coll
 ## Prediction Result:
 Best model to use is Random Forest with 0.96 R2 score
 
+##Deployment:
+This project is deployed on Render: https://car-price-prediction-cbbq.onrender.com
+
 ## Sample:
 * ![sample1](images/z1.png)
 * ![sample2](images/z2.png)
